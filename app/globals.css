@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import "tw-animate-css";
+@import "tailwindcss-animate";
 @import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
@@ -95,4 +95,31 @@
   html {
     @apply font-sans;
   }
+}
+
+/* Width of the scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* Background of the scrollbar track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+/* Draggable handle (thumb) */
+::-webkit-scrollbar-thumb {
+  background: rgb(186, 185, 185);
+  border-radius: 0px;
+  transition: all 0.3s ease;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #9d9d9d;
 }
