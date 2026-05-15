@@ -28,14 +28,16 @@ const Header = () => {
         <Show when={"signed-in"}>
           <div className="flex justify-center items-center gap-3">
             <UserButton showName />
-            <SignOutButton>
-              <Button
-                className="px-5 py-4 text-lg font-semibold cursor-pointer hover:bg-blue-500 transition-all duration-300 hover:text-white"
-                variant={"outline"}
-              >
-                Sign Out
-              </Button>
-            </SignOutButton>
+            <div className="hidden md:block">
+              <SignOutButton>
+                <Button
+                  className="px-5 py-4 text-lg font-semibold cursor-pointer hover:bg-blue-500 transition-all duration-300 hover:text-white"
+                  variant={"outline"}
+                >
+                  Sign Out
+                </Button>
+              </SignOutButton>
+            </div>
           </div>
         </Show>
       </div>

@@ -1,8 +1,8 @@
 @import "tailwindcss";
-@import "tailwindcss-animate";
 @import "shadcn/tailwind.css";
+@plugin "tailwindcss-animate";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&: is(.dark *));
 
 @theme {
   /* 1. Map the Tailwind 'sans' utility to your Poppins variable */
@@ -16,6 +16,7 @@
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
   /* ... add other color mappings here if they aren't working ... */
 }
 

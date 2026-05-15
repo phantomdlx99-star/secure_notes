@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -25,9 +26,11 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" className={`${poppins.variable}`}>
         <body className="font-sans antialiased selection:bg-blue-400">
-          <Header />
-          <main className="pt-20 bg-[#F1F4F6]">{children}</main>
-          <Toaster />
+          <TooltipProvider>
+            <Header />
+            <main className="pt-20 bg-[#F1F4F6]">{children}</main>
+            <Toaster position="top-center" richColors />
+          </TooltipProvider>
         </body>
       </html>
     </ClerkProvider>
