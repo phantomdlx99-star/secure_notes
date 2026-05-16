@@ -60,63 +60,70 @@ export function NoteCard({ note }: { note: Note }) {
               </TooltipContent>
             </Tooltip>
 
-            <AlertDialogContent className="rounded-2xl border-none bg-white">
+            {/* Inside your NoteCard.tsx Edit Dialog content block */}
+            <AlertDialogContent className="sm:max-w-md max-h-[85vh] flex flex-col rounded-2xl border-none bg-white p-6">
               <AlertDialogHeader>
                 <AlertDialogTitle className="text-xl font-bold">
                   Edit Note
                 </AlertDialogTitle>
               </AlertDialogHeader>
 
-              {/* Form action handles everything safely without typescript errors */}
+              {/* The Form turns into a flex container to distribute heights properly */}
               <form
                 action={async (formData) => {
                   const response = await updateNote(note.id, formData);
                   if (response?.success) {
                     toast.success(response.success);
-                    setIsUpdateOpen(false); // Close modal on success
+                    setIsUpdateOpen(false);
                   } else {
                     toast.error(response?.error || "Failed to update note");
                   }
                 }}
+                className="flex-1 flex flex-col min-h-0"
               >
-                <div className="w-full h-auto flex flex-col justify-start items-start gap-2">
-                  <Label
-                    htmlFor="edit-title"
-                    className="font-normal text-md text-gray-700"
-                  >
-                    Title
-                  </Label>
-                  <Input
-                    placeholder="title (e.g., Shopping List)"
-                    id="edit-title"
-                    name="title"
-                    value={editTitle}
-                    onChange={(e) => setEditTitle(e.target.value)}
-                    required
-                  />
-                </div>
-                <div className="w-full h-auto flex flex-col justify-start items-start gap-2 mt-4">
-                  <Label
-                    htmlFor="edit-content"
-                    className="font-normal text-md text-gray-700"
-                  >
-                    Content
-                  </Label>
-                  <Textarea
-                    placeholder="Content (Optional)"
-                    id="edit-content"
-                    name="content"
-                    value={editContent}
-                    onChange={(e) => setEditContent(e.target.value)}
-                  />
+                {/* This wrapper holds your text fields and scrolls dynamically if they overflow */}
+                <div className="flex-1 overflow-y-auto pr-1 space-y-4 my-2 max-h-[50vh] scrollbar-thin">
+                  <div className="w-full flex flex-col gap-2">
+                    <Label
+                      htmlFor="edit-title"
+                      className="font-medium text-sm text-gray-700"
+                    >
+                      Title
+                    </Label>
+                    <Input
+                      id="edit-title"
+                      name="title"
+                      value={editTitle}
+                      onChange={(e) => setEditTitle(e.target.value)}
+                      className="focus-visible:ring-[#457FD0]"
+                      required
+                    />
+                  </div>
+
+                  <div className="w-full flex flex-col gap-2">
+                    <Label
+                      htmlFor="edit-content"
+                      className="font-medium text-sm text-gray-700"
+                    >
+                      Content
+                    </Label>
+                    <Textarea
+                      id="edit-content"
+                      name="content"
+                      value={editContent}
+                      onChange={(e) => setEditContent(e.target.value)}
+                      className="min-h-45 focus-visible:ring-[#457FD0] resize-none"
+                    />
+                  </div>
                 </div>
 
-                <AlertDialogFooter className="mt-6">
+                {/* The Footer stays firmly pinned to the bottom of the modal */}
+                <AlertDialogFooter className="pt-4 border-t border-gray-100">
                   <AlertDialogCancel className="rounded-xl font-normal">
                     Discard
                   </AlertDialogCancel>
                   <AlertDialogAction
-                    className="bg-[#42648E] hover:bg-[#345277] transition-all duration-300 cursor-pointer rounded-xl font-medium text-white"
+                    className="bg-[#42648E] hover:bg-[#345277] transition-all rounded-xl font-medium text-white px-6"
                     type="submit"
                   >
                     Update Note
