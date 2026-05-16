@@ -26,7 +26,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" className={`${poppins.variable}`}>
         <body className="font-sans antialiased selection:bg-blue-400">
-          <TooltipProvider>
+          <TooltipProvider delayDuration={200}>
             <Header />
             <main className="pt-20 bg-[#F1F4F6]">{children}</main>
             <Toaster position="top-center" richColors />

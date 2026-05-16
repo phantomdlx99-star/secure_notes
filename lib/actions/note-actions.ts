@@ -45,3 +45,16 @@ export const deleteNote = async (id: string) => {
     return { error: "Failed to delete note." };
   }
 };
+
+export const updateNote = async (id: string, formdata: FormData) => {
+  const supabase = await createClerkSupabaseClient();
+  const title = formdata.get("title");
+  const content = formdata.get("content");
+  const { error } = await supabase
+    .from("notes")
+    .update({ title, content })
+    .eq("id", id);
+  if (error) return { error: "Failed to update the note" };
+  revalidatePath("/");
+  return { success: "Note updated successfully!" };
+};
